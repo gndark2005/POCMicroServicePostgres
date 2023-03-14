@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="BuildingLink.Messaging" Version="1.0.8" />
+    <PackageReference Include="BuildingLink.Services.Authentication" Version="1.0.23" />
+    <PackageReference Include="FluentValidation" Version="11.2.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BuildingLink.ModuleServiceTemplate.Events\BuildingLink.ModuleServiceTemplate.Events.csproj" />
+    <ProjectReference Include="..\BuildingLink.ModuleServiceTemplate.Repositories.CodeFirst\BuildingLink.ModuleServiceTemplate.Repositories.CodeFirst.csproj" />
+    <ProjectReference Include="..\BuildingLink.ModuleServiceTemplate.Repositories.DatabaseFirst\BuildingLink.ModuleServiceTemplate.Repositories.DatabaseFirst.csproj" />
+    <ProjectReference Include="..\BuildingLink.ModuleServiceTemplate\BuildingLink.ModuleServiceTemplate.csproj" />
+  </ItemGroup>
+
+</Project>

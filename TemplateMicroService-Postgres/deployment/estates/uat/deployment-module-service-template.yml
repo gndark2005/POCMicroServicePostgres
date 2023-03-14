@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: module-service-template
+  namespace: module-service-template-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      workload.user.cattle.io/workloadselector: deployment-module-service-template-namespace-module-service-template
+  template:
+    metadata:
+      labels:
+        workload.user.cattle.io/workloadselector: deployment-module-service-template-namespace-module-service-template
+    spec:
+      containers:
+        - name: module-service-template
+          image: ghcr.io/buildinglink/[[image_name]]
+          env:
+            - name: DOTNET_ENVIRONMENT
+              value: UAT
+            - name: TZ
+              value: America/New_York
+          envFrom:
+            - secretRef:
+                name: module-service-template
+          ports:
+            - containerPort: 80
+              name: tcp
+              protocol: TCP
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/live
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 1
+            timeoutSeconds: 2
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /health/ready
+              port: 80
+              scheme: HTTP
+            initialDelaySeconds: 10
+            periodSeconds: 60
+            successThreshold: 2
+            timeoutSeconds: 2
+          resources: {}
+      imagePullSecrets:
+        - name: ghcr

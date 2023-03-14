@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BuildingLink.ModuleServiceTemplate.Api</name>
+    </assembly>
+    <members>
+        <member name="T:BuildingLink.ModuleServiceTemplate.Configuration.ConfigurationManager">
+            <summary>
+            Configurations helper.
+            </summary>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ConfigurationManager.Get(System.String)">
+            <summary>
+            Load configuration.
+            </summary>
+            <param name="environmentName">Environment name.</param>
+            <returns>Configuration.</returns>
+        </member>
+        <member name="T:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions">
+            <summary>
+            Static class used to add layers of services to the ASP.NET core service collection.
+            </summary>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddPresentationServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add presentation services (Swagger, CORS, Controllers) to the ASP.NET core service collection.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <param name="configuration">Configuration settings.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddBusinessService(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Add business layer services.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddDataServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add data access services and initialize Db context.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <param name="configuration">Configuration settings.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddAuthenticationServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add authentication services to the ASP.NET core service collection.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <param name="environment">Host environment.</param>
+            <param name="configuration">Configuration settings.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddHealthServices(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add healthy services to the ASP.NET core service collection.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <param name="environment">Host environment.</param>
+            <param name="configuration">Configuration settings.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Configuration.ServiceCollectionExtensions.AddMessaging(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Hosting.IHostEnvironment,Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Add BuildingLink Messaging configuration to service collention.
+            </summary>
+            <param name="services">ASP.NET core service collection.</param>
+            <param name="environment">Host environment.</param>
+            <param name="configuration">Configuration settings.</param>
+            <returns>ASP.NET core service collection.</returns>
+        </member>
+        <member name="T:BuildingLink.ModuleServiceTemplate.Controllers.BookController">
+            <summary>
+            Book controller example with authentication.
+            </summary>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.#ctor(BuildingLink.ModuleServiceTemplate.Services.Books.IBookStore)">
+            <summary>
+            Initializes a new instance of the <see cref="T:BuildingLink.ModuleServiceTemplate.Controllers.BookController"/> class.
+            Constructor. Create the BookController instance and it injects all of the necessary services.
+            </summary>
+            <param name="bookStore">BookStore.</param>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.GetAll">
+            <summary>Returns all books.</summary>
+            <returns>Returns all the active books.</returns>
+            <response code ="200">Returns books.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="500">Returns a server error.</response>
+            <remarks>Books.</remarks>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.GetBook(System.Guid)">
+            <summary>Returns a book.</summary>
+            <param name="bookId">Book Id.</param>
+            <returns>Returns a book.</returns>
+            <response code ="200">Returns book.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="404">Returns a Not Found.</response>
+            <response code ="500">Returns a server error.</response>
+            <remarks>Books.</remarks>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.Add(BuildingLink.ModuleServiceTemplate.Services.Books.DTO.CreateBookDto)">
+            <summary>Add new book to the store.</summary>
+            <param name="createBookDto">New book creation request object.</param>
+            <returns>Returns the new book added to the store.</returns>
+            <response code ="201">Returns the new book added to the store.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="409">Returns an Invalid Operation Error.</response>
+            <response code ="500">Returns a server error.</response>
+            <remarks>Books.</remarks>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.ChangeBookStatus(System.Guid)">
+            <summary>Change the book status from "AvailableSoon" to "Available".</summary>
+            <param name="bookId">Book Id.</param>
+            <returns>Returns the book with the new status.</returns>
+            <response code ="200">Returns the book with the new status.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="404">Returns a Not Found.</response>
+            <response code ="409">Returns an Invalid Operation Error.</response>
+            <response code ="500">Returns a server error.</response>
+            <remarks>Books.</remarks>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.BookController.RemoveBook(System.Guid)">
+            <summary>Remove the book from the store.</summary>
+            <param name="bookId">Book Id.</param>
+            <returns>Returns 'true' if the book was removed, 'false' if the book was not found.</returns>
+            <response code ="200">Returns 'true' if the book was removed, 'false' if the book was not found.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="404">Returns a Not Found.</response>
+            <response code ="409">Returns an Invalid Operation Error.</response>
+            <response code ="500">Returns a server error.</response>
+            <remarks>Books.</remarks>
+        </member>
+        <member name="T:BuildingLink.ModuleServiceTemplate.Controllers.UserController">
+            <summary>
+            Hello word controller example.
+            </summary>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.UserController.GetUsersByUnitId(System.Int32)">
+            <summary>User service endpoint example.</summary>
+            <param name="unitId">Unit Id.</param>
+            <returns>Returns "users".</returns>
+            <response code ="200">Returns a Users by UnitId.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="500">Returns a server error.</response>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Controllers.UserController.GetUserPermitionSettings(System.Int32)">
+            <summary>User service endpoint example.</summary>
+            <param name="permissionId">Permission Id.</param>
+            <returns>A <see cref="T:System.Threading.Tasks.Task"/> representing the asynchronous operation.</returns>
+            <response code ="200">Returns permission settings for current user.</response>
+            <response code ="401">Returns an Unauthorized Error.</response>
+            <response code ="403">Returns a Forbidden Error.</response>
+            <response code ="500">Returns a server error.</response>
+        </member>
+        <member name="T:BuildingLink.ModuleServiceTemplate.HostExtensions">
+            <summary>
+            Provide extensions method for the Host proccess.
+            </summary>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.HostExtensions.SeedData(Microsoft.Extensions.Hosting.IHost)">
+            <summary>
+            Initialize the database with a data collection.
+            </summary>
+            <param name="host">Host proccess.</param>
+            <returns>Host proccess.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.HostExtensions.CleanData(Microsoft.Extensions.Hosting.IHost)">
+            <summary>
+            Remove database and migrate after remove.
+            </summary>
+            <param name="host">Host proccess.</param>
+            <returns>Host proccess.</returns>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            This method gets called by the runtime. Use this method to add services to the container.
+            For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940.
+            </summary>
+            <param name="services">Specifies the contract for a collection of service descriptors.</param>
+        </member>
+        <member name="M:BuildingLink.ModuleServiceTemplate.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IWebHostEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app">The mechanisms to configure an application's request pipeline.</param>
+            <param name="env">Provides information about the web hosting environment an application is running in.</param>
+        </member>
+    </members>
+</doc>

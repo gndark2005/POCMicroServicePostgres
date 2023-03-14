@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+    bmssql:
+        image: mcr.microsoft.com/mssql/server:2019-latest
+        environment:
+            ACCEPT_EULA: 'Y'
+            SA_PASSWORD: 'Password1!'
+    integration:
+        build:
+            context: ../
+            dockerfile: ./tests/Dockerfile.integration
+        environment:
+            WAIT_HOSTS: bmssql:1433
+            WAIT_HOSTS_TIMEOUT: 300
+            ASPNETCORE_ENVIRONMENT: Testing
+            GITHUB_TOKEN: ${GITHUB_TOKEN}
+            SONAR_PROJECT: ${SONAR_PROJECT}
+            SONAR_TOKEN: ${SONAR_TOKEN}
+            SONAR_URL: ${SONAR_URL}
+            SONAR_ARGS: ${SONAR_ARGS}
+            TEAMCITY_PROJECT_NAME: ${TEAMCITY_PROJECT_NAME}
+        image: bmstemplate:build-${BUILD_NUMBER}
+        volumes:
+            - ../:/src

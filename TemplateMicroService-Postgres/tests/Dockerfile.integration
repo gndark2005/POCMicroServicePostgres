@@ -1,0 +1,12 @@
+
+ARG DOTNET_VERSION_TAG=6.0-alpine3.15
+
+FROM ghcr.io/buildinglink/buildagent-dotnet:$DOTNET_VERSION_TAG
+
+WORKDIR /src
+
+CMD /wait && \
+    dotnet nuget add source https://nuget.pkg.github.com/buildinglink/index.json --name github.com --username github --password $GITHUB_TOKEN --store-password-in-clear-text && \
+    dotnet sonarscanner begin /k:"$SONAR_PROJECT" /d:sonar.host.url="$SONAR_URL" /d:sonar.login="$SONAR_TOKEN" /d:sonar.cs.dotcover.reportsPaths=dotCover.html /d:sonar.cs.vstest.reportsPaths=results.trx $SONAR_ARGS && \
+    dotnet dotcover test --dcXML="coverage.xml" tests/BuildingLink.ModuleServiceTemplate.Tests/BuildingLink.ModuleServiceTemplate.Tests.csproj --logger "trx;LogFileName=./results.trx" --verbosity=normal && \
+    dotnet sonarscanner end /d:sonar.login="$SONAR_TOKEN"

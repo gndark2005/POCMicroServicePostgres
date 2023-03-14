@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AnalyseParams>
+  <Output>dotCover.html</Output>
+  <ReportType>html</ReportType>
+  <Filters>
+    <ExcludeFilters>
+      <FilterEntry>
+        <ModuleMask>xunit.assert</ModuleMask>
+      </FilterEntry>
+      <FilterEntry>
+        <ModuleMask>*Tests*</ModuleMask>
+      </FilterEntry>
+    </ExcludeFilters>
+  </Filters>
+  <AttributeFilters>
+    <AttributeFilterEntry>
+      <ClassMask>System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute</ClassMask>
+    </AttributeFilterEntry>
+  </AttributeFilters>
+</AnalyseParams>

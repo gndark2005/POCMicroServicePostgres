@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "BuildingLink.ModuleServiceTemplate.Tests": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Local"
+      }
+    }
+  }
+}
